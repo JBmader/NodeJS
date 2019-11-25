@@ -1,0 +1,14 @@
+{
+    "name": "ece-ast",
+    "description": "NodeJS project for ECE class",
+    "version": "0.1.0",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "nodemon": "^2.0.1"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "dev": "./node_modules/.bin/nodemon "
+      }
+}
