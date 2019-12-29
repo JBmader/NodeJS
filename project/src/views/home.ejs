@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ('partials/form_head'); %>
+  </head>
+  <body class="container">
+    <div class="wrapper fadeInDown">
+<div id="formContent">
+  <!-- Tabs Titles -->
+  <h2>Welcome</h2>
+  <!-- Login Form -->
+  <form id="form">
+    <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
+    <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+    <input type="submit" class="fadeIn fourth" value="Log In" onclick="window.location.replace('/display')">
+  </form>
+
+  <!-- Sign up -->
+  <div id="formFooter">
+    <a class="underlineHover" href="/signup">Not signed up?</a>
+  </div>
+
+</div>
+</div>
+
+<script>
+      $("#form").submit(e => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        $.ajax({
+          url: "/auth/login",
+          type: "POST",
+          dataType: "application/json",
+          data: {
+            login: formData.get("login"),
+            password: formData.get("password")
+          },
+          complete: function(res) {
+            if (res.status == 404) {
+              $("#alert")
+                .html("Unknown unser")
+                .css({ display: "block" });
+            }
+            if (res.status == 401) {
+              $("#alert")
+                .html("Wrong password")
+                .css({ display: "block" });
+            }
+            if (res.status == 200) {
+              window.location.replace(`/display`);
+            }
+          }
+        });
+      });
+    </script>
+
+  </body>
+</html>

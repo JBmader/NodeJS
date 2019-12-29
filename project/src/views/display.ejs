@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ('partials/form_head'); %>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+  </head>
+  <body class="container">
+
+    <div class="wrapper fadeInDown">
+
+      <div class="text-center">
+      <form>
+        <input type="date" id="date" class="fadeIn second" name="date" placeholder="date">
+        <input type="text" id="metric" class="fadeIn third" name="metric" placeholder="metric">
+        <input type="submit" class="fadeIn fourth" value="Submit metric" id="show-metrics">
+      </form>
+      </div>
+      <canvas id="chLine" height="100"></canvas>
+      <button type="button" class="btn btn-danger" name="logout" onclick="window.location.replace('/home')">Log out</button>
+    </div>
+
+
+    <script>
+/*
+    $("#show-metrics").click(e => {
+      e .preventDefault();
+      $.getJSON("/metrics.json", {}, data => {
+        const content = data.map(d => {
+          let values = data.map((d)=>
+        return d.value;
+      )
+        });
+      });
+    }); */
+
+
+    // chart colors
+var colors = ['#007bff','#28a745','#333333','#c3e6cb','#dc3545','#6c757d'];
+
+/* large line chart */
+var chLine = document.getElementById("chLine");
+var chartData = {
+  labels: ["jan", "feb", "mar", "apr", "jun", "jul", "aug", "sep", "oct", "nov", "dec"],
+  datasets: [{
+    data: [589, 445, 483, 503, 689, 692, 634],
+    backgroundColor: 'transparent',
+    borderColor: colors[0],
+    borderWidth: 4,
+    pointBackgroundColor: colors[0]
+  }]
+};
+
+if (chLine) {
+  new Chart(chLine, {
+  type: 'line',
+  data: chartData,
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: false
+        }
+      }]
+    },
+    legend: {
+      display: false
+    }
+  }
+  });
+}
+    </script>
+  </body>
+</html>

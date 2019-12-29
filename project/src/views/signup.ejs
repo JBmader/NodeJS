@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ('partials/form_head'); %>
+  </head>
+  <body class="container">
+    <div class="wrapper fadeInDown">
+<div id="formContent">
+  <!-- Tabs Titles -->
+  <h2>Sign up</h2>
+  <!-- Login Form -->
+  <form id=form>
+    <input type="text" id="mail" class="fadeIn second" name="mail" placeholder="mail">
+    <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
+    <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+    <input type="submit" class="fadeIn fourth" value="Sign Up" onclick="window.location.replace('/display')">
+  </form>
+
+  <!-- Sign up -->
+  <div id="formFooter">
+    <a class="underlineHover" href="/">Already signed up?</a>
+  </div>
+
+</div>
+</div>
+
+<script>
+    $("#form").submit(e => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      $.ajax({
+        url: "/signup",
+        type: "POST",
+        dataType: "application/json",
+        data: {
+          email: formData.get("email"),
+          login: formData.get("login"),
+          password: formData.get("password")
+        }
+        }
+      });
+    });
+  </script>
+
+  </body>
+</html>
